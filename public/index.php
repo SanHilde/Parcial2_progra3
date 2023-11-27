@@ -9,16 +9,17 @@ error_reporting(-1);
 ini_set('display_errors', 1);
 
 require __DIR__ . '/../vendor/autoload.php';
-require_once './controllers/UsuarioController.php';
-require_once './controllers/ProductoController.php';
-require_once './controllers/MesaController.php';
-require_once './controllers/PedidoController.php';
-require_once './controllers/ArchivoController.php';
-require_once './controllers/LogInController.php';
+require_once './controllers/CuentaBancoController.php';
+require_once './controllers/DepositoController.php';
+require_once './controllers/RetiroController.php';
+require_once './controllers/PuntosController.php';
+require_once './controllers/AjusteController.php';
+// require_once './controllers/LogInController.php';
 require_once './db/AccesoDatos.php';
-require_once './middlewares/SectorMiddleware.php';
-require_once './middlewares/AuthMiddleware.php';
-require_once './utils/AutentificadorJWT.php';
+// require_once './middlewares/SectorMiddleware.php';
+// require_once './middlewares/AuthMiddleware.php';
+// require_once './utils/AutentificadorJWT.php';
+
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
@@ -33,7 +34,7 @@ $app->addBodyParsingMiddleware();
 
 $app->group('/', function (RouteCollectorProxy $group) {
   $group->get('[/]', function (Request $request, Response $response, $args) {
-      $payload = json_encode(array("mensaje" => "Bienvenido a La Comandita"));
+      $payload = json_encode(array("mensaje" => "Bienvenido a Banco Provincia"));
       sleep(2);
       $response->getBody()->write($payload);
       return $response->withHeader('Content-Type', 'application/json');
@@ -41,47 +42,16 @@ $app->group('/', function (RouteCollectorProxy $group) {
   $group->post('[/]', \LogInController::class . ':Loggearse');
 });
 
-$app->group('/clientes', function (RouteCollectorProxy $group) {
-  $group->get('[/]', \PedidoController::class . ':TraerPorCodigo');
-});
-
-$app->group('/exportar', function (RouteCollectorProxy $group) {
-  $group->post('[/]', \ArchivoController::class . ':ExportarArchivo')->add(SectorMiddleware::class .":authSocio")->add(new AuthMiddleware());
-});
-$app->group('/importar', function (RouteCollectorProxy $group) {
-  $group->post('[/]', \ArchivoController::class . ':ImportarArchivo')->add(SectorMiddleware::class .":authSocio")->add(new AuthMiddleware());
-});
-// peticiones
-$app->group('/usuarios', function (RouteCollectorProxy $group) {
-    $group->get('[/]', \UsuarioController::class . ':TraerTodos')->add(SectorMiddleware::class .":authSocio")->add(new AuthMiddleware());
-    $group->get('/{usuario}', \UsuarioController::class . ':TraerUno')->add(SectorMiddleware::class .":authSocio")->add(new AuthMiddleware());
-    $group->post('[/]', \UsuarioController::class . ':CargarUno')->add(SectorMiddleware::class .":authSocio")->add(new AuthMiddleware());
-    $group->put('[/]', \UsuarioController::class . ':ModificarUno')->add(SectorMiddleware::class .":authSocio")->add(new AuthMiddleware());
-    $group->delete('[/]', \UsuarioController::class . ':BorrarUno')->add(SectorMiddleware::class .":authSocio")->add(new AuthMiddleware());
-  });
-
-$app->group('/productos', function (RouteCollectorProxy $group) {
-    $group->get('[/]', \ProductoController::class . ':TraerTodos')->add(SectorMiddleware::class .":authMozo")->add(new AuthMiddleware());
-    $group->get('/{producto}', \ProductoController::class . ':TraerUno')->add(SectorMiddleware::class .":authMozo")->add(new AuthMiddleware());
-    $group->post('[/]', \ProductoController::class . ':CargarUno')->add(SectorMiddleware::class .":authSocio")->add(new AuthMiddleware());
-    $group->put('[/]', \ProductoController::class . ':ModificarUno')->add(SectorMiddleware::class .":authSocio")->add(new AuthMiddleware());
-    $group->delete('[/]', \ProductoController::class . ':BorrarUno')->add(SectorMiddleware::class .":authSocio")->add(new AuthMiddleware());
-});
-
-$app->group('/mesas', function (RouteCollectorProxy $group) {
-  $group->get('[/]', \MesaController::class . ':TraerTodos')->add(SectorMiddleware::class .":authSocio")->add(new AuthMiddleware());
-  $group->get('/{id}', \MesaController::class . ':TraerUno')->add(SectorMiddleware::class .":authMozo")->add(new AuthMiddleware());
-  $group->post('[/]', \MesaController::class . ':CargarUno')->add(SectorMiddleware::class .":authSocio")->add(new AuthMiddleware());
-  $group->put('[/]', \MesaController::class . ':ModificarUno')->add(SectorMiddleware::class .":authMozo")->add(new AuthMiddleware());
-  $group->delete('[/]', \MesaController::class . ':BorrarUno')->add(SectorMiddleware::class .":authSocio")->add(new AuthMiddleware());
-});
-
-$app->group('/pedidos', function (RouteCollectorProxy $group) {
-  $group->get('[/]', \PedidoController::class . ':TraerTodos')->add(new AuthMiddleware());
-  $group->get('/{id}', \PedidoController::class . ':TraerUno');  // Ruta para obtener un pedido por su ID
-  $group->post('[/]', \PedidoController::class . ':CargarUno')->add(SectorMiddleware::class .":authMozo")->add(new AuthMiddleware());
-  $group->put('[/]', \PedidoController::class . ':ModificarUno')->add(new AuthMiddleware());
-  $group->delete('[/]', \PedidoController::class . ':BorrarUno')->add(SectorMiddleware::class .":authMozo")->add(new AuthMiddleware());
+$app->group('/punto', function (RouteCollectorProxy $group) {
+  $group->post('1', \PuntosController::class . ':CuentaAlta');
+  $group->post('2', \PuntosController::class . ':ConsultarCuenta');
+  $group->post('3', \PuntosController::class . ':DepositoCuenta');
+  $group->get('4', \PuntosController::class . ':ConsultarMovimientos');
+  $group->put('5', \PuntosController::class . ':ModificarCuenta');
+  $group->post('6', \PuntosController::class . ':RetiroCuenta');
+  $group->post('7', \PuntosController::class . ':AjusteCuenta');
+  $group->delete('9', \PuntosController::class . ':BorrarCuenta');
+  $group->get('10', \PuntosController::class . ':ConsultarMovimientos');
 });
 
 

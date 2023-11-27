@@ -1,0 +1,683 @@
+{
+	"info": {
+		"_postman_id": "87e62544-65b7-4e1f-81c7-cf0a86f8f38f",
+		"name": "Parcial 2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29816620"
+	},
+	"item": [
+		{
+			"name": "Punto 1b",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Cuenta3",
+							"type": "text"
+						},
+						{
+							"key": "apellido",
+							"value": "Paraborrarrrrraaaa",
+							"type": "text"
+						},
+						{
+							"key": "tipoDocumento",
+							"value": "DNI",
+							"type": "text"
+						},
+						{
+							"key": "numeroDocumento",
+							"value": "22222222",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "Cuenta2@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "tipoDeCuenta",
+							"value": "CC",
+							"type": "text"
+						},
+						{
+							"key": "moneda",
+							"value": "$",
+							"type": "text"
+						},
+						{
+							"key": "saldoInicial",
+							"value": "500",
+							"type": "text"
+						},
+						{
+							"key": "nroDeCuenta",
+							"value": "505624",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "fotoPerfil",
+							"type": "file",
+							"src": "/C:/Users/santy/Pictures/Saved Pictures/imagen3.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/public/punto1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"public",
+						"punto1"
+					],
+					"query": [
+						{
+							"key": "saldoInicial",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Punto 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tipoDeCuenta",
+							"value": "CA",
+							"type": "text"
+						},
+						{
+							"key": "nroDeCuenta",
+							"value": "778020",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/public/punto2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"public",
+						"punto2"
+					],
+					"query": [
+						{
+							"key": "saldoInicial",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Punto 3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tipoDeCuenta",
+							"value": "Ca",
+							"type": "text"
+						},
+						{
+							"key": "moneda",
+							"value": "$",
+							"type": "text"
+						},
+						{
+							"key": "nroDeCuenta",
+							"value": "778020",
+							"type": "text"
+						},
+						{
+							"key": "imagen",
+							"type": "file",
+							"src": "/C:/Users/santy/Pictures/Saved Pictures/talonario.JPG"
+						},
+						{
+							"key": "importe",
+							"value": "9999",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/public/punto3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"public",
+						"punto3"
+					],
+					"query": [
+						{
+							"key": "saldoInicial",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Punto 4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Fernando",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "apellido",
+							"value": "Rodriguez",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tipoDocumento",
+							"value": "DNI",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "numeroDocumento",
+							"value": "11111111",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "fernando@gmail.com",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tipoDeCuenta",
+							"value": "CC",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "moneda",
+							"value": "U$S",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "saldoInicial",
+							"value": "25500",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "nroDeCuenta",
+							"value": "448844",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "imagen",
+							"type": "file",
+							"src": "/C:/Users/santy/Pictures/Saved Pictures/talonario.JPG",
+							"disabled": true
+						},
+						{
+							"key": "punto",
+							"value": "3",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "importe",
+							"value": "4000",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/public/punto4?punto=4e&fecha=26-11-2023&tipoDeCuenta=CC&moneda=U$S&usuario=22222222&fechaUno=18-10-2023&fechaDos=27-11-2023",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"public",
+						"punto4"
+					],
+					"query": [
+						{
+							"key": "punto",
+							"value": "4e"
+						},
+						{
+							"key": "fecha",
+							"value": "26-11-2023"
+						},
+						{
+							"key": "tipoDeCuenta",
+							"value": "CC"
+						},
+						{
+							"key": "moneda",
+							"value": "U$S"
+						},
+						{
+							"key": "usuario",
+							"value": "22222222"
+						},
+						{
+							"key": "fechaUno",
+							"value": "18-10-2023"
+						},
+						{
+							"key": "fechaDos",
+							"value": "27-11-2023"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Punto 5",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nombre",
+							"value": "Enzo",
+							"type": "text"
+						},
+						{
+							"key": "apellido",
+							"value": "Fernandez",
+							"type": "text"
+						},
+						{
+							"key": "tipoDocumento",
+							"value": "DNI",
+							"type": "text"
+						},
+						{
+							"key": "numeroDocumento",
+							"value": "48759622",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "enzo@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "moneda",
+							"value": "$",
+							"type": "text"
+						},
+						{
+							"key": "nroDeCuenta",
+							"value": "778020",
+							"type": "text"
+						},
+						{
+							"key": "tipoDeCuenta",
+							"value": "CA",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/public/punto5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"public",
+						"punto5"
+					],
+					"query": [
+						{
+							"key": "saldoInicial",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Punto 6",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tipoDeCuenta",
+							"value": "CA",
+							"type": "text"
+						},
+						{
+							"key": "moneda",
+							"value": "$",
+							"type": "text"
+						},
+						{
+							"key": "nroDeCuenta",
+							"value": "937722",
+							"type": "text"
+						},
+						{
+							"key": "importe",
+							"value": "2000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/public/punto6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"public",
+						"punto6"
+					],
+					"query": [
+						{
+							"key": "saldoInicial",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Punto 7",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tipoAAjustar",
+							"value": "retiro",
+							"description": "retiro o deposito",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "motivo",
+							"value": "equivocacion al depositar",
+							"type": "text"
+						},
+						{
+							"key": "importe",
+							"value": "500",
+							"description": "aclarar si + o -",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/public/punto7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"public",
+						"punto7"
+					],
+					"query": [
+						{
+							"key": "saldoInicial",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Punto 9",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "sabor",
+						"value": "jamon y morron",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "tipo",
+						"value": "molde",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "tipoDeCuenta",
+							"value": "CC",
+							"type": "text"
+						},
+						{
+							"key": "nroDeCuenta",
+							"value": "031144",
+							"type": "text"
+						},
+						{
+							"key": "moneda",
+							"value": "$",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/public/punto9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"public",
+						"punto9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Punto 10",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Fernando",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "apellido",
+							"value": "Rodriguez",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tipoDocumento",
+							"value": "DNI",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "numeroDocumento",
+							"value": "11111111",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "fernando@gmail.com",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tipoDeCuenta",
+							"value": "CC",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "moneda",
+							"value": "U$S",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "saldoInicial",
+							"value": "25500",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "nroDeCuenta",
+							"value": "448844",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "imagen",
+							"type": "file",
+							"src": "/C:/Users/santy/Pictures/Saved Pictures/talonario.JPG",
+							"disabled": true
+						},
+						{
+							"key": "punto",
+							"value": "3",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "importe",
+							"value": "4000",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/public/punto10?punto=10d&fecha=27-11-2023&tipoDeCuenta=CC&moneda=U$S&usuario=12345674&fechaUno=18-10-2023&fechaDos=27-11-2023",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"public",
+						"punto10"
+					],
+					"query": [
+						{
+							"key": "punto",
+							"value": "10d"
+						},
+						{
+							"key": "fecha",
+							"value": "27-11-2023"
+						},
+						{
+							"key": "tipoDeCuenta",
+							"value": "CC"
+						},
+						{
+							"key": "moneda",
+							"value": "U$S"
+						},
+						{
+							"key": "usuario",
+							"value": "12345674"
+						},
+						{
+							"key": "fechaUno",
+							"value": "18-10-2023"
+						},
+						{
+							"key": "fechaDos",
+							"value": "27-11-2023"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

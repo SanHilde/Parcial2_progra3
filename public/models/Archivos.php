@@ -145,7 +145,8 @@ public static function ConvertirCSVAJson($array)
     }
     public static function SubirImagen ($archivo, $idImagen,$ubicacionArchivo)
     {
-        $tipo= $archivo['type'];
+        $tipo= $archivo->getClientMediaType();
+        $respuesta= false;
         if ($tipo == "image/jpeg")
         {
             $extension = ".jpeg";
@@ -155,22 +156,60 @@ public static function ConvertirCSVAJson($array)
         {
             mkdir ($ubicacionArchivo,0777,true);
         }
-        if (move_uploaded_file ($archivo['tmp_name'],$ubicacionArchivo."/".$nombre)==true)
+        if (move_uploaded_file ( $archivo->getStream()->getMetadata('uri'),$ubicacionArchivo."/".$nombre)==true)
         {
-            echo "\nArchivo ".$archivo['name'].", ahora llamado $nombre se ha subido correctamente\n";
-        }else
-        {
-            echo "\nError al subir el archivo $nombreImagen.\n";
-        }
+            //$respuesta= "\nArchivo ".$archivo['name'].", ahora llamado $nombre se ha subido correctamente\n";
+            $respuesta=true;
+        }//else
+      //  {
+      //      $respuesta "\nError al subir el archivo $nombreImagen.\n";
+     //   }
+        return $respuesta;
     }
-    public static function MoverArchivo ($nombre, $nuevaUbicacion, $ubicacionArchivo)
+    public static function MoverArchivo($nombre, $nuevaUbicacion, $ubicacionArchivo)
     {
-
-        if (file_exists($nuevaUbicacion) ==false)
-        {
-            mkdir ($nuevaUbicacion,0777,true);
+        if (ctype_digit(substr($nombre, 0, 6))) {
+        } else {
+            $nombre = '0' . $nombre;
         }
-        rename($ubicacionArchivo."/".$nombre.".jpeg", $nuevaUbicacion."/".$nombre.".jpeg");
+        if (file_exists($ubicacionArchivo . "/" . $nombre . ".jpeg")) {
+            if (!file_exists($nuevaUbicacion)) {
+                mkdir($nuevaUbicacion, 0777, true);
+            }
+    
+            if (rename($ubicacionArchivo . "/" . $nombre . ".jpeg", $nuevaUbicacion . "/" . $nombre . ".jpeg")) {
+                $respuesta = true;
+            } else {
+                $respuesta = false;
+            }
+        } else {
+            $respuesta = false;
+        }
+    
+        return $respuesta;
     }
+    
+    
+    public static function ReemplazarArchivo($nombre, $nuevoArchivo, $ubicacionArchivo, $tipo)
+    {
+        $respuesta = false;
+        
+        if (!file_exists($ubicacionArchivo)) {
+            mkdir($ubicacionArchivo, 0777, true);
+        }
+    
+        $archivoExistente = $ubicacionArchivo . "/" . $nombre . $tipo;
+        if (file_exists($archivoExistente)) {
+            unlink($archivoExistente);
+        }
+    
+        $nuevaUbicacion = $ubicacionArchivo . "/" . $nombre . $tipo;
+        if (move_uploaded_file($nuevoArchivo->getStream()->getMetadata('uri'), $nuevaUbicacion)) {
+            $respuesta = true;
+        }
+    
+        return $respuesta;
+    }
+    
 }
 ?>
