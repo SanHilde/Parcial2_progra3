@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-11-2023 a las 21:45:42
+-- Tiempo de generación: 20-11-2023 a las 20:03:07
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `mesas` (
   `id` int(11) NOT NULL,
-  `estado` varchar(20) DEFAULT NULL,
-  `mozo` int(11) DEFAULT NULL
+  `estado` varchar(40) DEFAULT NULL,
+  `mozo` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -38,12 +38,14 @@ CREATE TABLE `mesas` (
 --
 
 INSERT INTO `mesas` (`id`, `estado`, `mozo`) VALUES
-(1, 'Disponible', 1),
-(2, 'Ocupada', 2),
-(3, 'Reservada', 3),
-(4, 'Disponible', 4),
-(5, 'Ocupada', 5),
-(6, 'Disponible', 6);
+(1, 'con cliente esperando pedido', 10),
+(2, 'con clientes comiendo', 10),
+(3, 'con clientes pagando', 10),
+(4, 'con clientes esperando pedido', 4),
+(5, 'cerrada', 4),
+(6, 'cerrada', 4),
+(7, 'con clientes comiendo', 4),
+(8, 'cerrada', 0);
 
 -- --------------------------------------------------------
 
@@ -53,26 +55,28 @@ INSERT INTO `mesas` (`id`, `estado`, `mozo`) VALUES
 
 CREATE TABLE `pedidos` (
   `id` int(11) NOT NULL,
-  `codigoPedido` int(11) DEFAULT NULL,
-  `producto` int(11) DEFAULT NULL,
-  `cantidad` int(11) DEFAULT NULL,
-  `mesa` int(11) DEFAULT NULL,
-  `mozo` int(11) DEFAULT NULL,
-  `fecha` datetime DEFAULT NULL,
-  `estado` varchar(20) DEFAULT NULL
+  `codigoPedido` varchar(5) NOT NULL,
+  `producto` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `mesa` int(11) NOT NULL,
+  `mozo` int(11) NOT NULL,
+  `fecha` datetime NOT NULL,
+  `estado` varchar(50) NOT NULL,
+  `sector` varchar(15) NOT NULL,
+  `tiempoPreparacion` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `pedidos`
 --
 
-INSERT INTO `pedidos` (`id`, `codigoPedido`, `producto`, `cantidad`, `mesa`, `mozo`, `fecha`, `estado`) VALUES
-(1, 101, 101, 2, 1, 1, '2023-11-05 13:00:00', 'Pendiente'),
-(2, 102, 102, 1, 2, 3, '2023-11-05 13:30:00', 'En preparación'),
-(3, 103, 103, 1, 3, 2, '2023-11-05 18:45:00', 'Servido'),
-(4, 104, 104, 4, 4, 4, '2023-11-05 19:15:00', 'Entregado'),
-(5, 105, 105, 2, 5, 6, '2023-11-05 20:30:00', 'Pendiente'),
-(6, 106, 106, 1, 2, 3, '2023-11-05 14:45:00', 'En preparación');
+INSERT INTO `pedidos` (`id`, `codigoPedido`, `producto`, `cantidad`, `mesa`, `mozo`, `fecha`, `estado`, `sector`, `tiempoPreparacion`) VALUES
+(58, 'S4JX1', 5, 2, 1, 10, '2023-11-18 22:07:47', 'en proceso', 'bartender', 2),
+(59, 'S4JX1', 2, 1, 4, 4, '2023-11-18 22:08:08', 'en proceso', 'cocina', 10),
+(67, '7BODQ', 1, 2, 6, 10, '2023-11-20 14:41:17', 'pendiente', 'cocina', 10),
+(68, '7BODQ', 5, 2, 6, 10, '2023-11-20 14:41:38', 'pendiente', 'bartender', 0),
+(69, 'FMDWI', 5, 2, 6, 10, '2023-11-20 16:37:59', 'pendiente', 'bartender', 10),
+(70, 'FMDWI', 5, 2, 6, 10, '2023-11-20 16:40:59', 'pendiente', 'bartender', 20);
 
 -- --------------------------------------------------------
 
@@ -81,22 +85,28 @@ INSERT INTO `pedidos` (`id`, `codigoPedido`, `producto`, `cantidad`, `mesa`, `mo
 --
 
 CREATE TABLE `productos` (
-  `codigoProducto` int(11) NOT NULL,
-  `descripcion` varchar(100) DEFAULT NULL,
-  `tipo` varchar(50) DEFAULT NULL
+  `id` int(11) NOT NULL,
+  `descripcion` varchar(255) NOT NULL,
+  `precio` decimal(10,2) NOT NULL,
+  `sector` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`codigoProducto`, `descripcion`, `tipo`) VALUES
-(101, 'Hamburguesa con queso', 'Comida'),
-(102, 'Pizza Margarita', 'Comida'),
-(103, 'Vino tinto', 'Bebida'),
-(104, 'Cerveza IPA', 'Bebida'),
-(105, 'Daiquiri de fresa', 'Bebida'),
-(106, 'Ensalada César', 'Comida');
+INSERT INTO `productos` (`id`, `descripcion`, `precio`, `sector`) VALUES
+(1, 'Hamburguesa', 8.99, 'cocina'),
+(2, 'Pizza', 5.00, 'cocina'),
+(3, 'Vino', 15.99, 'bartender'),
+(4, 'Cerveza', 4.99, 'cervecero'),
+(5, 'Daiquiri', 7.99, 'bartender'),
+(6, 'Ensalada', 6.99, 'cocina'),
+(7, 'Sushi', 12.99, 'cocina'),
+(8, 'Refresco', 2.99, 'bartender'),
+(9, 'Papas fritas', 5.55, 'cocina'),
+(10, 'Torta de coco', 8.50, 'candybar'),
+(11, 'Hamburgesa de garbanzos', 4.99, 'cocina');
 
 -- --------------------------------------------------------
 
@@ -108,23 +118,24 @@ CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) DEFAULT NULL,
   `clave` varchar(50) DEFAULT NULL,
-  `tipo` varchar(20) DEFAULT NULL,
-  `sector` varchar(50) DEFAULT NULL
+  `sector` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `clave`, `tipo`, `sector`) VALUES
-(1, 'Juan Martínez', 'clave1', 'bartender', 'Bar'),
-(2, 'Laura Rodríguez', 'clave2', 'bartender', 'Bar'),
-(3, 'Carlos Pérez', 'clave3', 'cerveceros', 'Bar'),
-(4, 'María López', 'clave4', 'cerveceros', 'Bar'),
-(5, 'Ricardo González', 'clave5', 'cocinero', 'Cocina'),
-(6, 'Ana Sánchez', 'clave6', 'cocinero', 'Cocina'),
-(7, 'David Ramírez', 'clave7', 'mozo', 'Salón'),
-(8, 'Patricia Torres', 'clave8', 'mozo', 'Salón');
+INSERT INTO `usuarios` (`id`, `nombre`, `clave`, `sector`) VALUES
+(1, 'Santiago Hildebrandt', 'clave1', 'socio'),
+(2, 'candybar', 'candybar', 'candybar'),
+(3, 'Ricardo Gonzalez', 'clave5', 'cocina'),
+(4, 'David Ramirez', 'clave7', 'mozo'),
+(5, 'Carlos Perez', 'clave3', 'cervecero'),
+(6, 'Juan Martinez', 'clave1', 'bartender'),
+(7, 'cocinero', 'cocinero', 'cocina'),
+(8, 'bartender', 'bartender', 'bartender'),
+(9, 'cervecero', 'cervecero', 'cervecero'),
+(10, 'mozo', 'mozo', 'mozo');
 
 --
 -- Índices para tablas volcadas
@@ -146,7 +157,7 @@ ALTER TABLE `pedidos`
 -- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
-  ADD PRIMARY KEY (`codigoProducto`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -162,7 +173,25 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `mesas`
 --
 ALTER TABLE `mesas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT de la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+
+--
+-- AUTO_INCREMENT de la tabla `productos`
+--
+ALTER TABLE `productos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
